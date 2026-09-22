@@ -1,4 +1,7 @@
 "use strict";
+// import { Request, Response, NextFunction } from 'express';
+// import jwt from 'jsonwebtoken';
+// import User from '../models/User';
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -10,25 +13,38 @@ const authenticateToken = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) {
-        return res.status(401).json({ success: false, message: 'Access token required' });
+        return res.status(401).json({
+            success: false,
+            message: 'Access token required',
+        });
     }
     try {
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
         const user = await User_1.default.findById(decoded.userId);
-        if (!user)
-            return res.status(401).json({ success: false, message: 'Invalid token' });
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid token',
+            });
+        }
         req.user = user;
         next();
     }
     catch (error) {
-        return res.status(403).json({ success: false, message: 'Invalid token' });
+        return res.status(403).json({
+            success: false,
+            message: 'Invalid token',
+        });
     }
 };
 exports.authenticateToken = authenticateToken;
 const authorizeRole = (roles) => {
     return (req, res, next) => {
         if (!req.user || !roles.includes(req.user.role)) {
-            return res.status(403).json({ success: false, message: 'Access denied' });
+            return res.status(403).json({
+                success: false,
+                message: 'Access denied',
+            });
         }
         next();
     };

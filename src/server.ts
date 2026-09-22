@@ -1,40 +1,3 @@
-// import express from 'express';
-// import cors from 'cors';
-// import mongoose from 'mongoose';
-// import dotenv from 'dotenv';
-
-// dotenv.config();
-
-// const app = express();
-
-// // Middleware
-// app.use(cors());
-// app.use(express.json());
-// app.use(express.static('public'));
-
-// // Routes
-// app.use('/api/auth', require('./routes/auth'));
-// app.use('/api/restaurants', require('./routes/restaurants'));
-// app.use('/api/reviews', require('./routes/reviews'));
-// app.use('/api/bookings', require('./routes/bookings'));
-// app.use('/api/dashboard', require('./routes/dashboard'));
-// app.use('/api/ai', require('./routes/ai'));
-
-// // Seed data
-// app.post('/api/seed', async (req, res) => {
-//   // Add seed data here
-//   res.json({ success: true, message: 'Seeded' });
-// });
-
-// // MongoDB Connection
-// mongoose.connect(process.env.MONGODB_URI!)
-//   .then(() => console.log('✅ MongoDB Connected'))
-//   .catch(err => console.error('❌ MongoDB Connection Error:', err));
-
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => {
-//   console.log(`🚀 Server running on port ${PORT}`);
-// });
 
 
 
@@ -58,11 +21,20 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: true,
-  credentials: true
+  credentials: true,
+
 }));
 app.use(express.json());
 app.use(express.static('public'));
 
+
+
+app.get('/', (_req, res) => {
+  res.json({
+    success: true,
+    message: 'FoodHub Backend API is running 🚀'
+  });
+});
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/restaurants', restaurantRoutes);
