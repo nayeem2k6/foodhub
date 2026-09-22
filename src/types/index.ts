@@ -1,5 +1,62 @@
+// export interface User {
+//   _id: string;
+//   name: string;
+//   email: string;
+//   password: string;
+//   role: 'USER' | 'ADMIN';
+//   avatar?: string;
+//   createdAt: Date;
+// }
+
+// export interface Restaurant {
+//   _id: string;
+//   title: string;
+//   description: string;
+//   image: string;
+//   price: number;
+//   rating: number;
+//   location: string;
+//   category: string;
+//   cuisine: string[];
+//   createdBy: string;
+//   createdAt: Date;
+// }
+
+// export interface Review {
+//   _id: string;
+//   rating: number;
+//   comment: string;
+//   userId: string;
+//   restaurantId: string;
+//   createdAt: Date;
+// }
+
+// export interface Booking {
+//   _id: string;
+//   userId: string;
+//   restaurantId: string;
+//   quantity: number;
+//   price: number;
+//   status: 'PENDING' | 'CONFIRMED' | 'CANCELLED';
+//   createdAt: Date;
+// }
+
+// export interface ApiResponse<T = any> {
+//   success: boolean;
+//   message: string;
+//   data?: T;
+//   meta?: {
+//     page: number;
+//     limit: number;
+//     total: number;
+//   };
+// }
+
+
+import { Types } from 'mongoose';
+
 export interface User {
-  _id: string;
+  _id: Types.ObjectId;
   name: string;
   email: string;
   password: string;
@@ -9,7 +66,7 @@ export interface User {
 }
 
 export interface Restaurant {
-  _id: string;
+  _id: Types.ObjectId;
   title: string;
   description: string;
   image: string;
@@ -18,23 +75,23 @@ export interface Restaurant {
   location: string;
   category: string;
   cuisine: string[];
-  createdBy: string;
+  createdBy: Types.ObjectId;
   createdAt: Date;
 }
 
 export interface Review {
-  _id: string;
+  _id: Types.ObjectId;
   rating: number;
   comment: string;
-  userId: string;
-  restaurantId: string;
+  userId: Types.ObjectId;
+  restaurantId: Types.ObjectId;
   createdAt: Date;
 }
 
 export interface Booking {
-  _id: string;
-  userId: string;
-  restaurantId: string;
+  _id: Types.ObjectId;
+  userId: Types.ObjectId;
+  restaurantId: Types.ObjectId;
   quantity: number;
   price: number;
   status: 'PENDING' | 'CONFIRMED' | 'CANCELLED';
